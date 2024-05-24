@@ -31,7 +31,8 @@ FROM ubuntu:jammy-20240212
 COPY --from=solc-builder /app/patches/solidity/build/solc/solc /usr/local/bin/solc
 RUN chmod +x /usr/local/bin/solc
 
-RUN curl -L https://foundry.paradigm.xyz | bash && \
+RUN apt-get update && apt-get install -y --no-install-recommends curl && \
+    curl -L https://foundry.paradigm.xyz | bash && \
     ~/.foundry/bin/foundryup && \
     foundryup --version
 
