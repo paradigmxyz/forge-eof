@@ -36,7 +36,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git && \
     curl -L https://foundry.paradigm.xyz | bash && \
-    ~/.foundry/bin/foundryup
+    ~/.foundry/bin/foundryup && \
+    cp ~/.foundry/bin/* /usr/local/bin
 ENV PATH="${HOME}/.foundry/bin:${PATH}"
 
 COPY entrypoint.sh /entrypoint.sh

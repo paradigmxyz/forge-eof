@@ -5,7 +5,7 @@ build:
 		-u $$(id -u):$$(id -g) \
 		ghcr.io/fgimenez/forge-eof:latest \
 		--foundry-directory /app/foundry \
-		--foundry-command build
+		--foundry-command "forge build"
 
 .PHONY: test
 test:
@@ -14,4 +14,4 @@ test:
 		-u $$(id -u):$$(id -g) \
 		ghcr.io/fgimenez/forge-eof:latest \
 		--foundry-directory /app/foundry \
-		--foundry-command "test -vvv"
+		--foundry-command "forge test --gas-report"
