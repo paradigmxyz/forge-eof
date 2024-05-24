@@ -33,7 +33,8 @@ RUN chmod +x /usr/local/bin/solc
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    curl && \
+    curl \
+    git && \
     curl -L https://foundry.paradigm.xyz | bash && \
     ~/.foundry/bin/foundryup && \
     foundryup --version
