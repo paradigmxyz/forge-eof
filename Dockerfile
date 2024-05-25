@@ -43,6 +43,12 @@ ENV PATH="${HOME}/.foundry/bin:${PATH}"
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+COPY solc-eof.sh /usr/local/bin/solc-eof.sh
+RUN chmod +x /usr/local/bin/solc-eof.sh
+
+COPY solc-legacy.sh /usr/local/bin/solc-legacy.sh
+RUN chmod +x /usr/local/bin/solc-legacy.sh
+
 EXPOSE 8545
 
 ENTRYPOINT ["/entrypoint.sh"]
