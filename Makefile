@@ -1,9 +1,12 @@
+IMAGE:=forge-eof
+# IMAGE:=ghcr.io/fgimenez/forge-eof@sha256:d687bfec3ef72c4a42de6b706b44a6dd582933493754c3ce43ca1d5d3de4c29d
+
 .PHONY: build-eof
 build-eof:
 	docker run --rm \
 		-v $$(pwd):/app/foundry \
 		-u $$(id -u):$$(id -g) \
-		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		$(IMAGE) \
 		--enable-eof \
 		--foundry-directory /app/foundry \
 		--foundry-command "forge build"
@@ -13,7 +16,7 @@ test-eof:
 	docker run --rm \
 		-v $$(pwd):/app/foundry \
 		-u $$(id -u):$$(id -g) \
-		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		$(IMAGE) \
 		--enable-eof \
 		--foundry-directory /app/foundry \
 		--foundry-command "forge test --gas-report -vvvvv"
@@ -23,7 +26,7 @@ build-legacy:
 	docker run --rm \
 		-v $$(pwd):/app/foundry \
 		-u $$(id -u):$$(id -g) \
-		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		$(IMAGE) \
 		--foundry-directory /app/foundry \
 		--foundry-command "forge build"
 
@@ -32,6 +35,6 @@ test-legacy:
 	docker run --rm \
 		-v $$(pwd):/app/foundry \
 		-u $$(id -u):$$(id -g) \
-		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		$(IMAGE) \
 		--foundry-directory /app/foundry \
 		--foundry-command "forge test --gas-report -vvvvv"
