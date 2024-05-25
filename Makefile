@@ -1,5 +1,8 @@
 IMAGE:=forge-eof
 # IMAGE:=ghcr.io/fgimenez/forge-eof@sha256:d687bfec3ef72c4a42de6b706b44a6dd582933493754c3ce43ca1d5d3de4c29d
+BUILD_COMMAND:="forge build"
+TEST_COMMAND:="forge test --gas-report -vvvvv"
+
 
 .PHONY: build-eof
 build-eof:
@@ -9,7 +12,7 @@ build-eof:
 		$(IMAGE) \
 		--enable-eof \
 		--foundry-directory /app/foundry \
-		--foundry-command "forge build"
+		--foundry-command $(BUILD_COMMAND)
 
 .PHONY: test-eof
 test-eof:
@@ -19,7 +22,7 @@ test-eof:
 		$(IMAGE) \
 		--enable-eof \
 		--foundry-directory /app/foundry \
-		--foundry-command "forge test --gas-report -vvvvv"
+		--foundry-command $(TEST_COMMAND)
 
 .PHONY: build-legacy
 build-legacy:
@@ -28,7 +31,7 @@ build-legacy:
 		-u $$(id -u):$$(id -g) \
 		$(IMAGE) \
 		--foundry-directory /app/foundry \
-		--foundry-command "forge build"
+		--foundry-command $(BUILD_COMMAND)
 
 .PHONY: test-legacy
 test-legacy:
@@ -37,4 +40,4 @@ test-legacy:
 		-u $$(id -u):$$(id -g) \
 		$(IMAGE) \
 		--foundry-directory /app/foundry \
-		--foundry-command "forge test --gas-report -vvvvv"
+		--foundry-command $(TEST_COMMAND)
