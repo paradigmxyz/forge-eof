@@ -18,11 +18,18 @@ WORKDIR /app
 
 RUN git submodule init && git submodule update --recursive
 
-WORKDIR /app/patches/solidity
+WORKDIR /app/patches/solidity-eof
 
 RUN mkdir build && \
     cd build && \
-    ls -al /app/patches/solidity && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release \
+             -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
+    make solc
+
+WORKDIR /app/patches/solidity-legacy
+
+RUN mkdir build && \
+    cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release \
              -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
     make solc
@@ -30,8 +37,9 @@ RUN mkdir build && \
 FROM ubuntu:jammy-20240212
 
 # Copy the compiled solc binary to a standard location
-COPY --from=solc-builder /app/patches/solidity/build/solc/solc /usr/local/bin/solc
-RUN chmod +x /usr/local/bin/solc
+COPY --from=solc-builder /app/patches/solidity/build/solc-legacy/solc /usr/local/bin/solc-legacy
+COPY --from=solc-builder /app/patches/solidity/build/solc-eof/solc /usr/local/bin/solc-eof
+RUN chmod +x /usr/local/bin/solc-legacy && chmod +x /usr/local/bin/solc-eof
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -44,12 +52,6 @@ ENV PATH="${HOME}/.foundry/bin:${PATH}"
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
-COPY solc-eof.sh /usr/local/bin/solc-eof.sh
-RUN chmod +x /usr/local/bin/solc-eof.sh
-
-COPY solc-legacy.sh /usr/local/bin/solc-legacy.sh
-RUN chmod +x /usr/local/bin/solc-legacy.sh
 
 EXPOSE 8545
 
