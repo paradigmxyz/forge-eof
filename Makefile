@@ -4,6 +4,7 @@ build-eof:
 		-v $$(pwd):/app/foundry \
 		-u $$(id -u):$$(id -g) \
 		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		--enable-eof \
 		--foundry-directory /app/foundry \
 		--foundry-command "forge build"
 
@@ -13,13 +14,24 @@ test-eof:
 		-v $$(pwd):/app/foundry \
 		-u $$(id -u):$$(id -g) \
 		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		--enable-eof \
 		--foundry-directory /app/foundry \
-		--foundry-command "forge test --optimize --gas-report -vvvvv"
+		--foundry-command "forge test --gas-report -vvvvv"
 
 .PHONY: build-legacy
 build-legacy:
-	forge build
+	docker run --rm \
+		-v $$(pwd):/app/foundry \
+		-u $$(id -u):$$(id -g) \
+		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		--foundry-directory /app/foundry \
+		--foundry-command "forge build"
 
 .PHONY: test-legacy
 test-legacy:
-	forge test --use 0.8.26 --optimize --gas-report -vvvvv
+	docker run --rm \
+		-v $$(pwd):/app/foundry \
+		-u $$(id -u):$$(id -g) \
+		ghcr.io/fgimenez/forge-eof@sha256:2bf665873f733e59732c706f51c0df419242ab9080b5325b6dff051a82409fc7 \
+		--foundry-directory /app/foundry \
+		--foundry-command "forge test --gas-report -vvvvv"
