@@ -21,18 +21,18 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Container: run Forge build
+      - name: EOF: run Forge build
         id: build
-        run: make build
+        run: make build-eof
 
-      - name: Container: run Forge test
+      - name: EOF: run Forge test
         id: test
-        run: make test
+        run: make test-eof
 
-      - name: Host: run Forge build
+      - name: Legacy: run Forge build
         id: build
-        run: forge build
+        run: make build-legacy
 
-      - name: Host: run Forge test
+      - name: Legacy: run Forge test
         id: test
-        run: forge test --gas-report -vvvvv
+        run: make test-legacy
