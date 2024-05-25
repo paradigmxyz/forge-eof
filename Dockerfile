@@ -36,8 +36,8 @@ RUN mkdir build && \
 FROM ubuntu:jammy-20240212
 
 # Copy the compiled solc binary to a standard location
-COPY --from=solc-builder /app/patches/solidity/build/solc-legacy/solc /usr/local/bin/solc-legacy
-COPY --from=solc-builder /app/patches/solidity/build/solc-eof/solc /usr/local/bin/solc-eof
+COPY --from=solc-builder /app/patches/solidity-legacy/build/solc/solc /usr/local/bin/solc-legacy
+COPY --from=solc-builder /app/patches/solidity-eof/build/solc/solc /usr/local/bin/solc-eof
 RUN chmod +x /usr/local/bin/solc-legacy && chmod +x /usr/local/bin/solc-eof
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
