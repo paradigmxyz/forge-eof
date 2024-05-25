@@ -21,10 +21,18 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Run Forge build
+      - name: Container: run Forge build
         id: build
         run: make build
 
-      - name: Run Forge test
+      - name: Container: run Forge test
         id: test
         run: make test
+
+      - name: Host: run Forge build
+        id: build
+        run: forge build
+
+      - name: Host: run Forge test
+        id: test
+        run: forge test --gas-report -vvvvv
