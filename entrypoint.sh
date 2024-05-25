@@ -4,7 +4,7 @@ main() {
     local FOUNDRY_COMMAND=""
     local FOUNDRY_DIRECTORY=""
     local FOUNDRY_SCRIPT=""
-    local SOLC_PATH="--use /usr/local/bin/solc-legacy.sh"
+    local SOLC_PATH="--use /usr/local/bin/solc-legacy"
 
     # Parse named arguments
     while [[ "$#" -gt 0 ]]; do
@@ -12,7 +12,7 @@ main() {
             --foundry-command) FOUNDRY_COMMAND="$2"; shift ;;
             --foundry-directory) FOUNDRY_DIRECTORY="--root $2"; shift ;;
             --foundry-script) FOUNDRY_SCRIPT="$2"; shift ;;
-            --enable-eof) SOLC_PATH="--use /usr/local/bin/solc-eof.sh";;
+            --enable-eof) SOLC_PATH="--use /usr/local/bin/solc-eof";;
             *) echo "Unknown parameter passed: $1"; exit 1 ;;
         esac
         shift
