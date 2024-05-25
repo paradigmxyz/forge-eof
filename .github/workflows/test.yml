@@ -22,17 +22,17 @@ jobs:
           submodules: recursive
 
       - name: "EOF run Forge build"
-        id: build
+        id: build-eof
         run: make build-eof
 
       - name: "EOF run Forge test"
-        id: test
+        id: test-eof
         run: make test-eof
 
       - name: "Legacy run Forge build"
-        id: build
+        id: build-legacy
         run: make build-legacy
 
       - name: "Legacy run Forge test"
-        id: test
+        id: test-legacy
         run: make test-legacy
