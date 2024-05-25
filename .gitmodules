@@ -1,3 +1,11 @@
 [submodule "lib/forge-std"]
 	path = lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "patches/solidity-legacy"]
+	path = patches/solidity-legacy
+	url = https://github.com/ipsilon/solidity.git
+	branch = eof-functions-rebased
+[submodule "patches/solidity-eof"]
+	path = patches/solidity-eof
+	url = https://github.com/fgimenez/solidity.git
+	branch = eof-functions-rebased
