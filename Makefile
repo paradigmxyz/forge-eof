@@ -1,7 +1,7 @@
 IMAGE:=forge-eof
 # IMAGE:=ghcr.io/fgimenez/forge-eof@sha256:d687bfec3ef72c4a42de6b706b44a6dd582933493754c3ce43ca1d5d3de4c29d
 BUILD_COMMAND:="forge build --force"
-TEST_COMMAND:="forge test --gas-report -vvvvv --force"
+TEST_COMMAND:="forge test --gas-report --force"
 
 
 .PHONY: build-eof
