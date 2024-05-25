@@ -1,6 +1,5 @@
 Dockerfile
 cache
-.git
 .github
 .gitignore
 Makefile
