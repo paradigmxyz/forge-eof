@@ -12,7 +12,7 @@ main() {
             --foundry-command) FOUNDRY_COMMAND="$2"; shift ;;
             --foundry-directory) FOUNDRY_DIRECTORY="--root $2"; shift ;;
             --foundry-script) FOUNDRY_SCRIPT="$2"; shift ;;
-            --enable-eof) SOLC_PATH="--use /usr/local/bin/solc-eof.sh"; shift ;;
+            --enable-eof) SOLC_PATH="--use /usr/local/bin/solc-eof.sh";;
             *) echo "Unknown parameter passed: $1"; exit 1 ;;
         esac
         shift
