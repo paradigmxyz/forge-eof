@@ -1,1 +1,12 @@
 Dockerfile
+cache
+.git
+.github
+.gitignore
+Makefile
+out
+README.md
+lib
+src
+test
+foundry.toml
