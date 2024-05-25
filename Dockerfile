@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && \
     update-ca-certificates
 
-COPY . /app
+COPY patches /app/patches
+COPY .git /app/.git
+COPY .gitmodules /app
 
 WORKDIR /app
 
