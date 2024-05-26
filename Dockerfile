@@ -23,7 +23,7 @@ RUN mkdir build && \
     cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release \
              -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
-    make solc
+    make solc -j$(nproc)
 
 WORKDIR /app/patches/solidity-legacy
 
@@ -31,7 +31,7 @@ RUN mkdir build && \
     cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release \
              -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
-    make solc
+    make solc -j$(nproc)
 
 FROM ubuntu:jammy-20240212
 
