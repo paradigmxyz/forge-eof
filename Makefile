@@ -1,5 +1,5 @@
 #IMAGE:=forge-eof
-IMAGE:=ghcr.io/fgimenez/forge-eof@sha256:f50b9cf0c19dfd894b56a8fe24482ad065c7ede9f1eb7c2c08c43fe87d98a075
+IMAGE:=ghcr.io/fgimenez/forge-eof@sha256:c146ad3da90dab17630685c31b0b2582a164915c4ad68c3f3ef46a2423f3ea69
 BUILD_COMMAND:="forge build --force"
 TEST_COMMAND:="forge test --gas-report --force -vvvv"
 
