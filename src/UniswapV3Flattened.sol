@@ -5157,6 +5157,8 @@ contract UniswapV3Factory is IUniswapV3Factory, UniswapV3PoolDeployer, NoDelegat
     function runTest() public {
         TestERC20 t1 = new TestERC20{salt: 0x0000000000000000000000000000000000000000000000000000000000000001}(1000000000);
         TestERC20 t2 = new TestERC20{salt: 0x0000000000000000000000000000000000000000000000000000000000000002}(1000000000);
+        (t1, t2) = (address(t2) < address(t1)) ? (t1, t2) : (t2, t1);
+
         IUniswapV3Pool pool = IUniswapV3Pool(createPool(address(t1), address(t2), 500));
 
         TestUniswapV3Callee test = new TestUniswapV3Callee();
