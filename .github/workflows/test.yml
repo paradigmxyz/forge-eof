@@ -21,18 +21,13 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
       - name: "EOF run Forge build"
         id: build-eof
-        run: make build-eof
+        run: forge build
 
       - name: "EOF run Forge test"
         id: test-eof
-        run: make test-eof
-
-      - name: "Legacy run Forge build"
-        id: build-legacy
-        run: make build-legacy
-
-      - name: "Legacy run Forge test"
-        id: test-legacy
-        run: make test-legacy
+        run: forge test

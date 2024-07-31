@@ -2,11 +2,8 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-evm_version = "Cancun"
-optimizer = true
-via_ir = true
-prague = true
-cbor_metadata = false
-bytecode_hash = "none"
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+solc = "./eof-solc"
+via_ir = true
+evm_version = "prague"
+eof_version = 1

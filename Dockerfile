@@ -10,14 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && \
     update-ca-certificates
 
-COPY .git /app/.git
-COPY .gitmodules /app
-
-WORKDIR /app
-
-RUN git submodule init && git submodule update --recursive
-
-WORKDIR /app/patches/solidity-eof
+WORKDIR /app/solidity
+RUN git clone https://github.com/ipsilon/solidity . && git checkout c49b88b
 
 RUN mkdir build && \
     cd build && \
@@ -25,33 +19,5 @@ RUN mkdir build && \
              -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
     make solc -j$(nproc)
 
-WORKDIR /app/patches/solidity-legacy
-
-RUN mkdir build && \
-    cd build && \
-    cmake .. -DCMAKE_BUILD_TYPE=Release \
-             -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
-    make solc -j$(nproc)
-
-FROM ubuntu:jammy-20240212
-
-# Copy the compiled solc binary to a standard location
-COPY --from=solc-builder /app/patches/solidity-legacy/build/solc/solc /usr/local/bin/solc-legacy
-COPY --from=solc-builder /app/patches/solidity-eof/build/solc/solc /usr/local/bin/solc-eof
-RUN chmod +x /usr/local/bin/solc-legacy && chmod +x /usr/local/bin/solc-eof
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates \
-    curl \
-    git && \
-    curl -L https://foundry.paradigm.xyz | bash && \
-    ~/.foundry/bin/foundryup && \
-    cp ~/.foundry/bin/* /usr/local/bin
-ENV PATH="${HOME}/.foundry/bin:${PATH}"
-
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-EXPOSE 8545
-
-ENTRYPOINT ["/entrypoint.sh"]
+WORKDIR /app/root
+ENTRYPOINT ["/app/solidity/build/solc/solc"]
