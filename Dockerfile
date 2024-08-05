@@ -19,5 +19,9 @@ RUN mkdir build && \
              -DCMAKE_CXX_FLAGS="-Wno-error=conversion" && \
     make solc -j$(nproc)
 
+FROM ubuntu:jammy-20240212
+
+COPY --from=solc-builder /app/solidity/build/solc/solc /app/solc
 WORKDIR /app/root
-ENTRYPOINT ["/app/solidity/build/solc/solc"]
+
+ENTRYPOINT ["/app/solc"]
