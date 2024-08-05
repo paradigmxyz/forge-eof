@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     update-ca-certificates
 
 WORKDIR /app/solidity
-RUN git clone https://github.com/ipsilon/solidity . && git checkout c49b88b
+RUN git clone https://github.com/klkvr/solidity . && git checkout 88cf606
 
 RUN mkdir build && \
     cd build && \
